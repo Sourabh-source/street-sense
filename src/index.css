@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
+  --color-secondary: var(--secondary);
+  --color-surface: var(--surface);
+  --color-on-surface: var(--on-surface);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-error: var(--error);
+  --color-error-container: var(--error-container);
+  --color-border: var(--border);
+  
+  --font-headline: "Manrope", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+:root {
+  --primary: #005dac;
+  --primary-container: #1976d2;
+  --secondary: #475f84;
+  --surface: #f5faff;
+  --on-surface: #0f1d25;
+  --surface-container: #e1f0fb;
+  --surface-container-low: #e9f5ff;
+  --surface-container-high: #dbeaf5;
+  --surface-container-lowest: #ffffff;
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+  --border: #e2e8f0;
+  --glass-bg: rgba(245, 250, 255, 0.7);
+}
+
+.dark {
+  --primary: #a8c8ff;
+  --primary-container: #00468a;
+  --secondary: #adc6ef;
+  --surface: #0a0e12;
+  --on-surface: #e1e2e5;
+  --surface-container: #1a1f26;
+  --surface-container-low: #13181e;
+  --surface-container-high: #222a33;
+  --surface-container-lowest: #101418;
+  --error: #ffb4ab;
+  --error-container: #93000a;
+  --border: #232a31;
+  --glass-bg: rgba(10, 14, 18, 0.7);
+}
+
+@layer base {
+  body {
+    @apply bg-surface text-on-surface font-body transition-colors duration-300;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline;
+  }
+}
+
+.civic-gradient {
+  @apply bg-linear-to-br from-[#005dac] to-[#1976d2];
+}
+
+.dark .civic-gradient {
+  @apply bg-linear-to-br from-[#00468a] to-[#1976d2];
+}
+
+.ambient-shadow {
+  box-shadow: 0px 12px 32px rgba(15, 29, 37, 0.06);
+}
+
+.dark .ambient-shadow {
+  box-shadow: 0px 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+}

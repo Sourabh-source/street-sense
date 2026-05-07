@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Street Sense",
+  "description": "A civic reporting platform for Bangalore, empowering communities through digital transparency and real-time incident tracking.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account details and civic points.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "photoURL": { "type": "string", "format": "uri" },
+        "sensePoints": { "type": "integer", "description": "Total points earned" },
+        "role": { "type": "string", "enum": ["citizen", "admin"] },
+        "phone": { "type": "string" },
+        "bio": { "type": "string" },
+        "customEmail": { "type": "string" },
+        "customRole": { "type": "string" },
+        "customMemberSince": { "type": "string" },
+        "bankName": { "type": "string" },
+        "accountNumber": { "type": "string" },
+        "ifscCode": { "type": "string" },
+        "upiId": { "type": "string" },
+        "kycStatus": { "type": "string", "enum": ["not_submitted", "under_review", "verified", "rejected"] },
+        "legalName": { "type": "string" },
+        "dob": { "type": "string" },
+        "address": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "ViolationReport": {
+      "title": "Violation Report",
+      "description": "A report of a civic violation.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "reporterUid": { "type": "string" },
+        "reporterName": { "type": "string" },
+        "type": { "type": "string", "description": "e.g. Illegal Parking, Pothole" },
+        "location": { "type": "string" },
+        "coordinates": {
+          "type": "object",
+          "properties": {
+            "latitude": { "type": "number" },
+            "longitude": { "type": "number" }
+          }
+        },
+        "severity": { "type": "string", "enum": ["low", "medium", "high"] },
+        "status": { "type": "string", "enum": ["submitted", "under-review", "verified", "action-taken", "resolved", "rejected", "info_requested", "fined"] },
+        "imageUrl": { "type": "string", "format": "uri" },
+        "notes": { "type": "string" },
+        "adminComment": { "type": "string" },
+        "rejectionReason": { "type": "string" },
+        "fineAmount": { "type": "number" },
+        "fineViolationType": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["reporterUid", "type", "location", "severity", "status", "imageUrl", "createdAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "User notification",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string", "enum": ["report_update", "achievement", "system"] },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "message", "read", "createdAt"]
+    },
+    "Person": {
+      "title": "Person Record",
+      "description": "A generic record for a person or contact.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "notes": { "type": "string" },
+        "addedBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "addedBy", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/reports/{reportId}": {
+      "schema": "ViolationReport",
+      "description": "Violation reports submitted by citizens"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "Notifications for users"
+    },
+    "/people/{personId}": {
+      "schema": "Person",
+      "description": "Manual person/contact records"
+    }
+  }
+}
